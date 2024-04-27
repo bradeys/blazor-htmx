@@ -1,0 +1,5 @@
+@page "/count"
+@layout RazorComponent
+@inject Counter.HtmxCounterState CounterState
+
+<p class="counter">Current count: @CounterState.Increment()</p>

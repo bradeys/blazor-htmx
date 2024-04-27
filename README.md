@@ -1,0 +1,1 @@
+Blazor+HTMX sample app

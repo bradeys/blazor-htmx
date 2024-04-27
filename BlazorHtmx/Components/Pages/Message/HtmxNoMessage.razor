@@ -1,0 +1,8 @@
+@page "/htmx-no-message"
+@layout RazorComponent
+
+<button class="btn btn-primary"
+        hx-swap="outerHTML"
+        hx-get="/htmx-message">
+    Show message
+</button>

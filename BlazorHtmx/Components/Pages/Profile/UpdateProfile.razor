@@ -1,0 +1,86 @@
+﻿@using System.ComponentModel.DataAnnotations
+@using BlazorHtmx.Components.Layout
+@using Microsoft.AspNetCore.Mvc
+
+@page "/update-profile"
+@layout RazorComponent
+
+@code {
+    [CascadingParameter] public HttpContext HttpContext { get; set; } = default!;
+
+    [SupplyParameterFromForm]
+    public ProfileForm Form { get; set; }
+    private string customMessage = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        Form ??= await Setup();
+    }
+
+    private async Task<ProfileForm> Setup()
+    {
+        ProfileForm info = new()
+            {
+                Name = "Bradey",
+                Email = "bstephens@catalisgov.com"
+            };
+        return info;
+    }
+
+    private async Task OnSubmit(dynamic test)
+    {
+        return;
+    }
+
+    public class ProfileForm
+    {
+        [Required]
+        public string Name { get; set; } = default!;
+
+        [EmailAddress(ErrorMessage = "Invalid email address.")]
+        [Required(ErrorMessage = "Please enter a valid email address")]
+        public string Email { get; set; } = default!;
+    }
+}
+
+<EditForm Model="Form"
+          OnValidSubmit="OnSubmit"
+          FormName="ProfileInfoForm"
+          hx-post="/update-profile"
+          hx-swap="outerHTML"
+          method="post"
+          class="max-w-2xl grid grid-cols-1 gap-y-6">
+    <DataAnnotationsValidator />
+    <label class="form-control w-full">
+        <div class="label">
+            <span class="label-text font-medium">Name</span>
+        </div>
+        <InputText @bind-Value="Form.Name"
+                   class="input input-bordered w-full" />
+        <ValidationMessage For="() => Form.Name" />
+    </label>
+    <label class="form-control w-full">
+        <div class="label">
+            <span class="label-text font-medium">Email address</span>
+        </div>
+        <InputText @bind-Value="Form.Email"
+                   type="email"
+                   using
+                   Microsoft.AspNetCore.Mvc;
+                   class="input input-bordered w-full" />
+        <ValidationMessage For="() => Form.Email" />
+        @if (!String.IsNullOrEmpty(customMessage))
+        {
+            <div class="mt-1 text-red-500 text-sm">
+                @customMessage
+            </div>
+        }
+    </label>
+    <div class="flex justify-end">
+        <button type="submit"
+                class="btn btn-neutral">
+            <span class="loading loading-spinner loading-xs htmx-indicator"></span>
+            Save
+        </button>
+    </div>
+</EditForm>

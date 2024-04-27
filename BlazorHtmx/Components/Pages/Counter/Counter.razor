@@ -1,0 +1,30 @@
+﻿@page "/counter"
+
+<PageTitle>Counter</PageTitle>
+
+<h1>Counter</h1>
+
+<div>
+    <p class="counter">Current count: @State.Value</p>
+    <button class="btn btn-primary"
+            hx-get="/count"
+            hx-target="previous .counter"
+            hx-swap="outerHTML">
+        Click me
+    </button>
+</div>
+
+@code {
+    [Parameter, EditorRequired]
+    public HtmxCounterState State { get; set; } = new();
+
+    public class HtmxCounterState
+    {
+        public int Value { get; set; } = 0;
+
+        public int Increment()
+        {
+            return ++Value;
+        }
+    }
+}

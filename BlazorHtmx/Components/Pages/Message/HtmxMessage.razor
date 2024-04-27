@@ -1,0 +1,23 @@
+@page "/htmx-message"
+@layout RazorComponent
+
+<div id="message">
+    <button class="btn btn-primary"
+            hx-get="/htmx-no-message"
+            hx-swap="outerHTML"
+            hx-target="#message"
+            hx-oop-target="#messageCounter">
+        Hide message
+    </button>
+
+    <div class="d-inline alert alert-info">
+        <span class="text-lg-center">
+            @Message
+        </span>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string? Message { get; set; } = "I ❤️ HTMX";
+}
