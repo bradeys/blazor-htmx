@@ -1,6 +1,6 @@
 using BlazorHtmx.Components;
-using BlazorHtmx.Components.Pages.Counter;
-using Microsoft.AspNetCore.Http.HttpResults;
+using BlazorHtmx.Features.Search;
+using static BlazorHtmx.Features.Counter.Counter;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +9,7 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 builder.Services
-    .AddSingleton<Counter.HtmxCounterState>();
+    .AddSingleton<HtmxCounterState>();
 
 var app = builder.Build();
 
@@ -26,5 +26,7 @@ app.UseStaticFiles();
 app.UseAntiforgery();
 
 app.MapRazorComponents<Routes>().AddInteractiveServerRenderMode();
+
+app.MapGamesEndpoints();
 
 app.Run();

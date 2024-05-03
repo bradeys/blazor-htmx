@@ -1,5 +1,6 @@
 ﻿@using System.ComponentModel.DataAnnotations
 @using BlazorHtmx.Components.Layout
+@using Microsoft.AspNetCore.Components.Forms
 @using Microsoft.AspNetCore.Mvc
 
 @page "/update-profile"
@@ -20,10 +21,10 @@
     private async Task<ProfileForm> Setup()
     {
         ProfileForm info = new()
-            {
-                Name = "Bradey",
-                Email = "bstephens@catalisgov.com"
-            };
+			{
+				Name = "Bradey",
+				Email = "bstephens@catalisgov.com"
+			};
         return info;
     }
 

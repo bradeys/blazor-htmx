@@ -1,0 +1,17 @@
+@using BlazorHtmx.Features.Games;
+
+@foreach (var game in Games)
+{
+    <tr>
+    <td>@game.Year</td>
+    <td>@game.Publisher</td>
+    <td>@game.Console</td>
+    <td>@game.Name</td>
+</tr>
+}
+
+@code
+{
+    [Parameter]
+    public IEnumerable<Game> Games { get; set; } = Enumerable.Empty<Game>();
+}
